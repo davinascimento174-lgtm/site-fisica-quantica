@@ -280,6 +280,355 @@
         .formula-box { background: rgba(122, 26, 42, 0.08); border-radius: 12px; padding: 14px 18px; margin-top: 12px; text-align: center; font-size: 1.1rem; font-weight: 700; color: #1a0d0d; border: 2px solid rgba(122, 26, 42, 0.15); }
         .formula-box span { color: #7a1a2a; font-size: 1.2rem; }
 
+        /* ===== ESPECTRO ELETROMAGNÉTICO INTERATIVO ===== */
+        .espectro-box {
+            background: rgba(255, 252, 250, 0.9); border-radius: 22px;
+            padding: 24px 22px 26px; margin: 16px 0 24px;
+            border: 2px solid rgba(122, 26, 42, 0.15);
+            box-shadow: 0 4px 20px rgba(122, 26, 42, 0.06);
+        }
+
+        .espectro-controles {
+            display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 20px;
+            align-items: center; justify-content: center; padding: 12px;
+            background: rgba(122, 26, 42, 0.05); border-radius: 14px;
+            border: 2px solid rgba(122, 26, 42, 0.10);
+        }
+        .espectro-controles .btn-controle {
+            background: rgba(255, 252, 250, 0.9);
+            border: 2px solid rgba(122, 26, 42, 0.15);
+            color: #7a1a2a; font-family: 'Inter', sans-serif;
+            font-weight: 700; font-size: 0.75rem; padding: 8px 16px;
+            border-radius: 30px; cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .espectro-controles .btn-controle:hover {
+            background: #7a1a2a; color: #fff; border-color: #7a1a2a;
+            transform: translateY(-2px); box-shadow: 0 4px 12px rgba(122, 26, 42, 0.3);
+        }
+        .espectro-controles .btn-controle.ativo {
+            background: #7a1a2a; color: #fff; border-color: #7a1a2a;
+            box-shadow: 0 4px 12px rgba(122, 26, 42, 0.3);
+        }
+        .espectro-controles .btn-controle i { font-size: 0.85rem; }
+
+        .espectro-slider-box {
+            background: rgba(255, 252, 250, 0.8); border-radius: 14px;
+            padding: 16px 20px; margin: 16px 0;
+            border: 2px solid rgba(122, 26, 42, 0.10);
+        }
+        .espectro-slider-box h4 {
+            font-size: 0.85rem; font-weight: 800; color: #7a1a2a;
+            margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+        }
+        .espectro-slider-box h4 i { font-size: 0.9rem; }
+        .espectro-slider {
+            width: 100%; height: 10px; border-radius: 10px;
+            background: linear-gradient(90deg, 
+                #6a1a2a 0%, #8a2535 15%, #a03040 30%, #b84050 42%, 
+                #e04050 50%, #c05060 60%, #a04050 75%, #8a2535 88%, #4a0d18 100%);
+            outline: none; -webkit-appearance: none; appearance: none;
+            cursor: pointer; border: 2px solid rgba(122, 26, 42, 0.2);
+        }
+        .espectro-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #fff; border: 3px solid #7a1a2a;
+            cursor: grab; box-shadow: 0 2px 8px rgba(122, 26, 42, 0.4);
+            transition: transform 0.2s;
+        }
+        .espectro-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+        .espectro-slider::-moz-range-thumb {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #fff; border: 3px solid #7a1a2a;
+            cursor: grab; box-shadow: 0 2px 8px rgba(122, 26, 42, 0.4);
+        }
+        .espectro-slider-info {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 12px; flex-wrap: wrap; gap: 10px;
+        }
+        .espectro-slider-info .faixa-atual {
+            display: flex; align-items: center; gap: 8px;
+            font-weight: 800; color: #7a1a2a; font-size: 0.9rem;
+        }
+        .espectro-slider-info .faixa-atual .indicador-cor {
+            width: 16px; height: 16px; border-radius: 50%;
+            border: 2px solid #fff; box-shadow: 0 0 0 2px #7a1a2a;
+        }
+        .espectro-slider-info .faixa-desc {
+            font-size: 0.78rem; color: #5a3038; font-weight: 600;
+        }
+
+        .espectro-visual {
+            display: flex; border-radius: 16px; overflow: hidden;
+            margin: 16px 0 20px; border: 3px solid rgba(122, 26, 42, 0.2);
+            box-shadow: 0 6px 20px rgba(122, 26, 42, 0.12);
+            height: 110px; position: relative;
+        }
+        .espectro-visual .faixa {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: #fff; font-size: 0.6rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+            padding: 6px 4px; text-align: center;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer; position: relative; overflow: hidden;
+        }
+        .espectro-visual .faixa::after {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(255,255,255,0); transition: background 0.3s;
+            pointer-events: none;
+        }
+        .espectro-visual .faixa:hover {
+            flex: 1.8; transform: scale(1.05); z-index: 3;
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #7a1a2a, 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .espectro-visual .faixa:hover::after { background: rgba(255,255,255,0.15); }
+        .espectro-visual .faixa.ativo {
+            flex: 2; z-index: 2;
+            box-shadow: 0 0 0 3px #fff, 0 0 0 6px #7a1a2a, 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .espectro-visual .faixa.ativo::after { background: rgba(255,255,255,0.2); }
+        .espectro-visual .faixa .faixa-icone {
+            font-size: 1.3rem; margin-bottom: 4px; transition: transform 0.3s;
+        }
+        .espectro-visual .faixa:hover .faixa-icone { transform: scale(1.3) rotate(5deg); }
+        .espectro-visual .faixa .faixa-nome { font-size: 0.62rem; line-height: 1.2; }
+        .espectro-visual .faixa .faixa-comp {
+            font-size: 0.55rem; opacity: 0.8; margin-top: 2px; font-weight: 600;
+        }
+
+        .espectro-visual .faixa.radio { background: linear-gradient(180deg, #8a2535, #6a1a2a); }
+        .espectro-visual .faixa.micro-ondas { background: linear-gradient(180deg, #a03040, #7a1a2a); }
+        .espectro-visual .faixa.infravermelho { background: linear-gradient(180deg, #b84050, #8a2535); }
+        .espectro-visual .faixa.visivel {
+            background: linear-gradient(180deg, #ff8080, #e04050, #a03040);
+            flex: 1.5;
+        }
+        .espectro-visual .faixa.ultravioleta { background: linear-gradient(180deg, #c05060, #9b3246); }
+        .espectro-visual .faixa.raios-x { background: linear-gradient(180deg, #a04050, #7a1a2a); }
+        .espectro-visual .faixa.raios-gama { background: linear-gradient(180deg, #8a2535, #4a0d18); }
+
+        /* ===== ESPECTRO VISÍVEL INTERATIVO ===== */
+        .espectro-visivel-wrapper {
+            position: relative; margin: 24px 0 10px;
+        }
+        .espectro-visivel-titulo {
+            font-size: 0.85rem; font-weight: 800; color: #7a1a2a;
+            margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+            justify-content: space-between; flex-wrap: wrap;
+        }
+        .espectro-visivel-titulo .dica {
+            font-size: 0.7rem; font-weight: 600; color: #5a3038;
+            background: rgba(122, 26, 42, 0.08); padding: 3px 12px;
+            border-radius: 30px; display: flex; align-items: center; gap: 6px;
+        }
+        .espectro-visivel-titulo .dica i { animation: pulseDica 1.5s infinite; }
+        @keyframes pulseDica { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+        .espectro-visivel-detalhe {
+            display: flex; height: 70px; border-radius: 12px;
+            overflow: hidden; border: 3px solid rgba(122, 26, 42, 0.25);
+            box-shadow: 0 6px 20px rgba(122, 26, 42, 0.15);
+            cursor: pointer;
+        }
+        .espectro-visivel-detalhe .cor {
+            flex: 1; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .espectro-visivel-detalhe .cor .cor-label {
+            font-size: 0.6rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            opacity: 0; transition: opacity 0.3s;
+            position: relative; z-index: 2;
+        }
+        .espectro-visivel-detalhe .cor .cor-nm {
+            font-size: 0.55rem; font-weight: 700;
+            opacity: 0; transition: opacity 0.3s;
+            position: relative; z-index: 2;
+        }
+        .espectro-visivel-detalhe .cor:hover {
+            flex: 2; z-index: 3;
+            box-shadow: inset 0 0 0 3px #fff, 0 0 30px rgba(0,0,0,0.4);
+        }
+        .espectro-visivel-detalhe .cor:hover .cor-label,
+        .espectro-visivel-detalhe .cor:hover .cor-nm {
+            opacity: 1;
+        }
+        .espectro-visivel-detalhe .cor.ativo {
+            flex: 2.5; z-index: 4;
+            box-shadow: inset 0 0 0 3px #fff, 0 0 30px rgba(0,0,0,0.5);
+        }
+        .espectro-visivel-detalhe .cor.ativo .cor-label,
+        .espectro-visivel-detalhe .cor.ativo .cor-nm {
+            opacity: 1;
+        }
+        .espectro-visivel-detalhe .cor.vermelho { background: #e60000; }
+        .espectro-visivel-detalhe .cor.laranja { background: #ff8000; }
+        .espectro-visivel-detalhe .cor.amarelo { background: #ffdd00; color: #4a3a00; text-shadow: none; }
+        .espectro-visivel-detalhe .cor.verde { background: #00c800; }
+        .espectro-visivel-detalhe .cor.ciano { background: #00d0d0; }
+        .espectro-visivel-detalhe .cor.azul { background: #0060ff; }
+        .espectro-visivel-detalhe .cor.violeta { background: #6000c8; }
+
+        .espectro-visivel-rotulos {
+            display: flex; justify-content: space-between;
+            margin: 8px 0 0; font-size: 0.6rem;
+            font-weight: 700; color: #5a3038; padding: 0 4px;
+        }
+
+        /* Painel de detalhes da cor */
+        .espectro-cor-painel {
+            margin-top: 16px; min-height: 100px;
+        }
+        .espectro-cor-card {
+            background: rgba(255, 252, 250, 0.95);
+            border-radius: 18px; padding: 18px 20px;
+            border: 2px solid rgba(122, 26, 42, 0.15);
+            border-left: 6px solid #7a1a2a;
+            box-shadow: 0 4px 16px rgba(122, 26, 42, 0.08);
+            animation: detalheAparecer 0.4s ease;
+            display: flex; gap: 16px; align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        @keyframes detalheAparecer {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .espectro-cor-card .cor-amostra {
+            width: 70px; height: 70px; border-radius: 14px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+        .espectro-cor-card .cor-conteudo { flex: 1; min-width: 200px; }
+        .espectro-cor-card .cor-titulo {
+            font-size: 1.15rem; font-weight: 800;
+            color: #1a0d0d; display: flex; align-items: center;
+            gap: 10px; flex-wrap: wrap; margin-bottom: 4px;
+        }
+        .espectro-cor-card .cor-titulo .cor-simbolo {
+            width: 14px; height: 14px; border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #7a1a2a;
+        }
+        .espectro-cor-card .cor-sub {
+            font-size: 0.78rem; font-weight: 600;
+            color: #7a1a2a; margin-bottom: 12px;
+        }
+        .espectro-cor-card .cor-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px; margin-bottom: 12px;
+        }
+        .espectro-cor-card .cor-stat {
+            background: rgba(122, 26, 42, 0.06);
+            border-radius: 10px; padding: 8px 12px;
+            border: 1px solid rgba(122, 26, 42, 0.10);
+        }
+        .espectro-cor-card .cor-stat .stat-label {
+            font-size: 0.6rem; font-weight: 800;
+            color: #7a1a2a; text-transform: uppercase;
+            letter-spacing: 0.5px; margin-bottom: 2px;
+        }
+        .espectro-cor-card .cor-stat .stat-valor {
+            font-size: 1rem; font-weight: 800; color: #1a0d0d;
+        }
+        .espectro-cor-card .cor-desc {
+            font-size: 0.85rem; color: #3a2028;
+            padding: 10px 14px; background: rgba(122, 26, 42, 0.04);
+            border-radius: 10px; border-left: 3px solid #7a1a2a;
+        }
+
+        /* ===== PAINEL DE DETALHES DA FAIXA (MESMA DECORAÇÃO DA COR) ===== */
+        .espectro-painel {
+            margin-top: 16px; min-height: 100px;
+        }
+        .espectro-detalhe-card {
+            background: rgba(255, 252, 250, 0.95);
+            border-radius: 18px; padding: 18px 20px;
+            border: 2px solid rgba(122, 26, 42, 0.15);
+            border-left: 6px solid #7a1a2a;
+            box-shadow: 0 4px 16px rgba(122, 26, 42, 0.08);
+            animation: detalheAparecer 0.4s ease;
+        }
+        .espectro-detalhe-card .detalhe-topo {
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 14px; flex-wrap: wrap;
+        }
+        .espectro-detalhe-card .detalhe-icone {
+            width: 60px; height: 60px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.6rem; flex-shrink: 0;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .espectro-detalhe-card .detalhe-titulo {
+            font-size: 1.15rem; font-weight: 800;
+            color: #1a0d0d; margin-bottom: 2px;
+        }
+        .espectro-detalhe-card .detalhe-sub {
+            font-size: 0.78rem; font-weight: 600;
+            color: #7a1a2a;
+        }
+        .espectro-detalhe-card .detalhe-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px; margin-bottom: 12px;
+        }
+        .espectro-detalhe-card .detalhe-stat {
+            background: rgba(122, 26, 42, 0.06);
+            border-radius: 10px; padding: 8px 12px;
+            border: 1px solid rgba(122, 26, 42, 0.10);
+        }
+        .espectro-detalhe-card .detalhe-stat .stat-label {
+            font-size: 0.6rem; font-weight: 800;
+            color: #7a1a2a; text-transform: uppercase;
+            letter-spacing: 0.5px; margin-bottom: 2px;
+        }
+        .espectro-detalhe-card .detalhe-stat .stat-valor {
+            font-size: 1rem; font-weight: 800; color: #1a0d0d;
+        }
+        .espectro-detalhe-card .detalhe-desc {
+            font-size: 0.85rem; color: #3a2028;
+            padding: 10px 14px; background: rgba(122, 26, 42, 0.04);
+            border-radius: 10px; border-left: 3px solid #7a1a2a;
+            margin-bottom: 12px;
+        }
+        .espectro-detalhe-card .detalhe-tags {
+            display: flex; flex-wrap: wrap; gap: 6px;
+        }
+        .espectro-detalhe-card .detalhe-tag {
+            background: rgba(122, 26, 42, 0.08);
+            color: #7a1a2a; font-size: 0.65rem; font-weight: 700;
+            padding: 3px 12px; border-radius: 30px;
+            border: 1px solid rgba(122, 26, 42, 0.12);
+        }
+        .espectro-detalhe-card .detalhe-tag.ionizante {
+            background: rgba(200, 40, 40, 0.12);
+            color: #b02020;
+            border-color: rgba(200, 40, 40, 0.25);
+        }
+        .espectro-detalhe-card .detalhe-tag.nao-ionizante {
+            background: rgba(40, 140, 60, 0.10);
+            color: #2a8a3a;
+            border-color: rgba(40, 140, 60, 0.2);
+        }
+        .espectro-placeholder {
+            background: rgba(122, 26, 42, 0.05);
+            border: 3px dashed rgba(122, 26, 42, 0.2);
+            border-radius: 18px; padding: 30px 20px;
+            text-align: center; color: #7a1a2a;
+            font-size: 0.85rem; font-weight: 600;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 8px;
+        }
+        .espectro-placeholder i { font-size: 2rem; opacity: 0.5; }
+
         /* ===== APLICAÇÕES ===== */
         .aplicacoes-box {
             background: rgba(255, 252, 250, 0.9); border-radius: 22px;
@@ -339,7 +688,6 @@
             box-shadow: 0 2px 12px rgba(122, 26, 42, 0.06);
         }
         .pseudo-item:hover { border-color: rgba(122, 26, 42, 0.30); box-shadow: 0 8px 24px rgba(122, 26, 42, 0.12); }
-
         .pseudo-header {
             background: linear-gradient(135deg, rgba(122, 26, 42, 0.10), rgba(122, 26, 42, 0.04));
             padding: 14px 18px; display: flex; align-items: center; gap: 12px;
@@ -353,18 +701,15 @@
             border-radius: 30px; border: 1px solid rgba(200, 40, 40, 0.2);
             text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
         }
-
         .pseudo-body { padding: 16px 18px 18px; }
         .pseudo-body p { font-size: 0.9rem; color: #3a2028; margin-bottom: 10px; }
         .pseudo-body p strong { color: #7a1a2a; }
-
         .pseudo-oque-e {
             background: rgba(122, 26, 42, 0.05); border-radius: 10px;
             padding: 10px 14px; margin-bottom: 12px; font-size: 0.88rem;
             border-left: 3px solid #7a1a2a;
         }
         .pseudo-oque-e strong { color: #7a1a2a; }
-
         .pseudo-verdade {
             background: rgba(40, 120, 60, 0.08); border-radius: 10px;
             padding: 10px 14px; font-size: 0.88rem;
@@ -651,6 +996,7 @@
         <a href="#inicio"><i class="fas fa-house-chimney"></i> Início</a>
         <a href="#corpo-negro"><i class="fas fa-fire"></i> Corpo Negro</a>
         <a href="#fotoeletrico"><i class="fas fa-bolt"></i> Efeito Fotoelétrico</a>
+        <a href="#espectro"><i class="fas fa-rainbow"></i> Espectro EM</a>
         <a href="#aplicacoes"><i class="fas fa-microchip"></i> Aplicações</a>
         <a href="#nao-quantica"><i class="fas fa-ban"></i> O que NÃO é</a>
         <a href="#pseudociencia"><i class="fas fa-triangle-exclamation"></i> Pseudociência</a>
@@ -835,6 +1181,145 @@
 
         <div class="transicao-box" style="margin-top: 16px;">
             <p><i class="fas fa-arrow-right"></i> <span class="destaque">Importância histórica:</span> O efeito fotoelétrico foi a <strong>primeira prova experimental</strong> da natureza quântica da luz e consolidou a teoria quântica como a <strong>nova física</strong> do século XX. Einstein recebeu o <strong>Prêmio Nobel</strong> por essa descoberta.</p>
+        </div>
+    </section>
+
+    <!-- ===== ESPECTRO ELETROMAGNÉTICO INTERATIVO ===== -->
+    <h2 class="section-title" id="espectro"><i class="fas fa-rainbow"></i> O Espectro Eletromagnético <span class="badge">🎯 Interativo</span></h2>
+
+    <section class="espectro-box">
+        <div class="corpo-negro-header">
+            <h3><i class="fas fa-wave-square"></i> Explore o Espectro Eletromagnético</h3>
+            <span class="tag-cn">Clique e descubra</span>
+        </div>
+
+        <div class="corpo-negro-intro">
+            <p><i class="fas fa-quote-left" style="color: #7a1a2a; margin-right: 6px;"></i> O <strong>espectro eletromagnético</strong> é o conjunto de todas as ondas eletromagnéticas, organizadas pela sua <strong>frequência</strong> (ou comprimento de onda). Clique em qualquer faixa abaixo para descobrir detalhes, ou use o <strong>slider</strong> para navegar pelo espectro!</p>
+        </div>
+
+        <!-- Controles rápidos -->
+        <div class="espectro-controles">
+            <button class="btn-controle" onclick="selecionarFaixa('radio')"><i class="fas fa-broadcast-tower"></i> Rádio</button>
+            <button class="btn-controle" onclick="selecionarFaixa('micro-ondas')"><i class="fas fa-wifi"></i> Micro-ondas</button>
+            <button class="btn-controle" onclick="selecionarFaixa('infravermelho')"><i class="fas fa-temperature-high"></i> Infravermelho</button>
+            <button class="btn-controle" onclick="selecionarFaixa('visivel')"><i class="fas fa-eye"></i> Visível</button>
+            <button class="btn-controle" onclick="selecionarFaixa('ultravioleta')"><i class="fas fa-sun"></i> Ultravioleta</button>
+            <button class="btn-controle" onclick="selecionarFaixa('raios-x')"><i class="fas fa-x-ray"></i> Raios-X</button>
+            <button class="btn-controle" onclick="selecionarFaixa('raios-gama')"><i class="fas fa-radiation"></i> Raios Gama</button>
+        </div>
+
+        <!-- Slider de frequência -->
+        <div class="espectro-slider-box">
+            <h4><i class="fas fa-sliders-h"></i> Ajuste a frequência (arraste o controle)</h4>
+            <input type="range" min="0" max="6" value="3" class="espectro-slider" id="espectroSlider" oninput="atualizarSlider(this.value)">
+            <div class="espectro-slider-info">
+                <div class="faixa-atual">
+                    <span class="indicador-cor" id="indicadorCor" style="background: #e04050;"></span>
+                    <span id="faixaAtualNome">Luz Visível</span>
+                </div>
+                <div class="faixa-desc" id="faixaAtualDesc">400 – 700 nm · Enxergada pelo olho humano</div>
+            </div>
+        </div>
+
+        <!-- Visual do espectro (clicável) -->
+        <div class="espectro-visual" id="espectroVisual">
+            <div class="faixa radio" onclick="selecionarFaixa('radio')" data-faixa="radio">
+                <i class="fas fa-broadcast-tower faixa-icone"></i>
+                <span class="faixa-nome">Rádio</span>
+                <span class="faixa-comp">&gt; 1 m</span>
+            </div>
+            <div class="faixa micro-ondas" onclick="selecionarFaixa('micro-ondas')" data-faixa="micro-ondas">
+                <i class="fas fa-wifi faixa-icone"></i>
+                <span class="faixa-nome">Micro-ondas</span>
+                <span class="faixa-comp">1 mm – 1 m</span>
+            </div>
+            <div class="faixa infravermelho" onclick="selecionarFaixa('infravermelho')" data-faixa="infravermelho">
+                <i class="fas fa-temperature-high faixa-icone"></i>
+                <span class="faixa-nome">Infravermelho</span>
+                <span class="faixa-comp">700 nm – 1 mm</span>
+            </div>
+            <div class="faixa visivel" onclick="selecionarFaixa('visivel')" data-faixa="visivel">
+                <i class="fas fa-eye faixa-icone"></i>
+                <span class="faixa-nome">Visível</span>
+                <span class="faixa-comp">400 – 700 nm</span>
+            </div>
+            <div class="faixa ultravioleta" onclick="selecionarFaixa('ultravioleta')" data-faixa="ultravioleta">
+                <i class="fas fa-sun faixa-icone"></i>
+                <span class="faixa-nome">Ultravioleta</span>
+                <span class="faixa-comp">10 – 400 nm</span>
+            </div>
+            <div class="faixa raios-x" onclick="selecionarFaixa('raios-x')" data-faixa="raios-x">
+                <i class="fas fa-x-ray faixa-icone"></i>
+                <span class="faixa-nome">Raios-X</span>
+                <span class="faixa-comp">0,01 – 10 nm</span>
+            </div>
+            <div class="faixa raios-gama" onclick="selecionarFaixa('raios-gama')" data-faixa="raios-gama">
+                <i class="fas fa-radiation faixa-icone"></i>
+                <span class="faixa-nome">Raios Gama</span>
+                <span class="faixa-comp">&lt; 0,01 nm</span>
+            </div>
+        </div>
+
+        <!-- ===== ESPECTRO VISÍVEL INTERATIVO ===== -->
+        <div class="espectro-visivel-wrapper">
+            <div class="espectro-visivel-titulo">
+                <span><i class="fas fa-eye"></i> Espectro Visível — clique em cada cor para ver o comprimento de onda</span>
+                <span class="dica"><i class="fas fa-hand-pointer"></i> Clique nas cores</span>
+            </div>
+            <div class="espectro-visivel-detalhe">
+                <div class="cor vermelho" onclick="selecionarCor('vermelho')" data-cor="vermelho">
+                    <span class="cor-label">Vermelho</span>
+                    <span class="cor-nm">~700 nm</span>
+                </div>
+                <div class="cor laranja" onclick="selecionarCor('laranja')" data-cor="laranja">
+                    <span class="cor-label">Laranja</span>
+                    <span class="cor-nm">~620 nm</span>
+                </div>
+                <div class="cor amarelo" onclick="selecionarCor('amarelo')" data-cor="amarelo">
+                    <span class="cor-label">Amarelo</span>
+                    <span class="cor-nm">~580 nm</span>
+                </div>
+                <div class="cor verde" onclick="selecionarCor('verde')" data-cor="verde">
+                    <span class="cor-label">Verde</span>
+                    <span class="cor-nm">~530 nm</span>
+                </div>
+                <div class="cor ciano" onclick="selecionarCor('ciano')" data-cor="ciano">
+                    <span class="cor-label">Ciano</span>
+                    <span class="cor-nm">~500 nm</span>
+                </div>
+                <div class="cor azul" onclick="selecionarCor('azul')" data-cor="azul">
+                    <span class="cor-label">Azul</span>
+                    <span class="cor-nm">~470 nm</span>
+                </div>
+                <div class="cor violeta" onclick="selecionarCor('violeta')" data-cor="violeta">
+                    <span class="cor-label">Violeta</span>
+                    <span class="cor-nm">~400 nm</span>
+                </div>
+            </div>
+            <div class="espectro-visivel-rotulos">
+                <span>Vermelho · 700 nm</span>
+                <span>Violeta · 400 nm</span>
+            </div>
+        </div>
+
+        <!-- Painel de detalhes da cor -->
+        <div class="espectro-cor-painel" id="espectroCorPainel">
+            <div class="espectro-placeholder">
+                <i class="fas fa-palette"></i>
+                <span>Clique em uma cor do arco-íris para ver o comprimento de onda</span>
+            </div>
+        </div>
+
+        <!-- Painel de detalhes da faixa -->
+        <div class="espectro-painel" id="espectroPainel">
+            <div class="espectro-placeholder">
+                <i class="fas fa-hand-pointer"></i>
+                <span>Clique em uma faixa do espectro para ver os detalhes</span>
+            </div>
+        </div>
+
+        <div class="transicao-box" style="margin-top: 20px;">
+            <p><i class="fas fa-arrow-right"></i> <span class="destaque">Conexão com a Quântica:</span> A energia de cada onda eletromagnética é dada por <strong>E = h·f</strong>. Quanto maior a frequência, maior a energia. Foi justamente ao estudar as frequências do espectro do <strong>corpo negro</strong> que Planck descobriu que a energia é <strong>quantizada</strong>. E foi ao observar o <strong>ultravioleta</strong> no efeito fotoelétrico que Einstein provou a existência dos <strong>fótons</strong>!</p>
         </div>
     </section>
 
@@ -1477,6 +1962,7 @@
             <a href="#inicio"><i class="fas fa-house-chimney"></i> Início</a>
             <a href="#corpo-negro"><i class="fas fa-fire"></i> Corpo Negro</a>
             <a href="#fotoeletrico"><i class="fas fa-bolt"></i> Efeito Fotoelétrico</a>
+            <a href="#espectro"><i class="fas fa-rainbow"></i> Espectro Eletromagnético</a>
             <a href="#aplicacoes"><i class="fas fa-microchip"></i> Aplicações</a>
             <a href="#nao-quantica"><i class="fas fa-ban"></i> O que NÃO é Quântica</a>
             <a href="#pseudociencia"><i class="fas fa-triangle-exclamation"></i> Pseudociência Quântica</a>
@@ -1494,6 +1980,7 @@
             <a href="#inicio"><i class="fas fa-arrow-up"></i> Topo</a>
             <a href="#corpo-negro"><i class="fas fa-fire"></i> Corpo Negro</a>
             <a href="#fotoeletrico"><i class="fas fa-bolt"></i> Efeito Fotoelétrico</a>
+            <a href="#espectro"><i class="fas fa-rainbow"></i> Espectro EM</a>
             <a href="#aplicacoes"><i class="fas fa-microchip"></i> Aplicações</a>
             <a href="#nao-quantica"><i class="fas fa-ban"></i> O que NÃO é</a>
             <a href="#pseudociencia"><i class="fas fa-triangle-exclamation"></i> Pseudociência</a>
@@ -1519,9 +2006,7 @@
     function skipIntro() {
         const overlay = document.getElementById('intro-overlay');
         overlay.classList.add('hide');
-        setTimeout(() => {
-            overlay.style.display = 'none';
-        }, 1200);
+        setTimeout(() => { overlay.style.display = 'none'; }, 1200);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -1529,11 +2014,129 @@
             const overlay = document.getElementById('intro-overlay');
             if (overlay && !overlay.classList.contains('hide')) {
                 overlay.classList.add('hide');
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 1200);
+                setTimeout(() => { overlay.style.display = 'none'; }, 1200);
             }
         }, 4200);
+    });
+
+    /* ===== ESPECTRO ELETROMAGNÉTICO INTERATIVO ===== */
+    const faixasData = {
+        'radio': { nome: 'Ondas de Rádio', sub: 'A faixa de menor frequência e menor energia', comprimento: '> 1 m', frequencia: '< 300 MHz', energia: 'Muito baixa', ionizante: false, icone: 'fas fa-broadcast-tower', cor: '#6a1a2a', descricao: 'As ondas de rádio são usadas em radiodifusão, televisão, Wi-Fi, Bluetooth e comunicação por satélite. Têm frequências baixas e não são ionizantes.', tags: ['Comunicação', 'Radiodifusão', 'Wi-Fi', 'Bluetooth', 'Satélites'] },
+        'micro-ondas': { nome: 'Micro-ondas', sub: 'Entre o rádio e o infravermelho', comprimento: '1 mm – 1 m', frequencia: '300 MHz – 300 GHz', energia: 'Baixa', ionizante: false, icone: 'fas fa-wifi', cor: '#7a1a2a', descricao: 'As micro-ondas são usadas em fornos, radares e redes 5G. Também são usadas na astronomia para estudar o universo.', tags: ['Forno micro-ondas', 'Radares', '5G', 'Astronomia'] },
+        'infravermelho': { nome: 'Infravermelho', sub: 'Sentida como calor', comprimento: '700 nm – 1 mm', frequencia: '300 GHz – 430 THz', energia: 'Média-baixa', ionizante: false, icone: 'fas fa-temperature-high', cor: '#8a2535', descricao: 'O infravermelho é sentido como calor. É usado em controles remotos, termografia, visão noturna e sensores de temperatura.', tags: ['Controle remoto', 'Termografia', 'Visão noturna', 'Calor'] },
+        'visivel': { nome: 'Luz Visível', sub: 'A única faixa que enxergamos', comprimento: '400 – 700 nm', frequencia: '430 – 750 THz', energia: 'Média', ionizante: false, icone: 'fas fa-eye', cor: '#e04050', descricao: 'A luz visível é a única faixa detectada pelo olho humano. Vai do violeta (400 nm) ao vermelho (700 nm), formando o arco-íris.', tags: ['Arco-íris', 'Visão', 'Fotossíntese', 'Cores'] },
+        'ultravioleta': { nome: 'Ultravioleta (UV)', sub: 'Além do violeta', comprimento: '10 – 400 nm', frequencia: '750 THz – 30 PHz', energia: 'Média-alta', ionizante: 'limiar', icone: 'fas fa-sun', cor: '#9b3246', descricao: 'O ultravioleta está presente na luz solar e causa queimaduras e câncer de pele. É usado em esterilização e produção de vitamina D.', tags: ['Sol', 'Bronzeamento', 'Esterilização', 'Vitamina D'] },
+        'raios-x': { nome: 'Raios-X', sub: 'Muito energéticos e ionizantes', comprimento: '0,01 – 10 nm', frequencia: '30 PHz – 30 EHz', energia: 'Alta', ionizante: true, icone: 'fas fa-x-ray', cor: '#7a1a2a', descricao: 'Os raios-X são muito energéticos e ionizantes. Usados em radiografias, tomografias e segurança de aeroportos. Exigem proteção.', tags: ['Radiografia', 'Tomografia', 'Aeroportos', 'Medicina'] },
+        'raios-gama': { nome: 'Raios Gama', sub: 'A faixa mais energética', comprimento: '< 0,01 nm', frequencia: '> 30 EHz', energia: 'Muito alta', ionizante: true, icone: 'fas fa-radiation', cor: '#4a0d18', descricao: 'Os raios gama têm a maior frequência e a maior energia. São produzidos em reações nucleares e supernovas. Usados em radioterapia.', tags: ['Radioterapia', 'Supernovas', 'Energia nuclear', 'Perigoso'] }
+    };
+
+    const coresData = {
+        'vermelho': { nome: 'Vermelho', comprimento: '700 – 635 nm', frequencia: '430 – 480 THz', energia: '1,77 – 1,99 eV', cor: '#e60000', descricao: 'O vermelho tem o maior comprimento de onda do espectro visível. É a primeira cor a desaparecer quando escurece — por isso os objetos vermelhos parecem mais escuros à noite.' },
+        'laranja': { nome: 'Laranja', comprimento: '635 – 590 nm', frequencia: '480 – 510 THz', energia: '1,99 – 2,10 eV', cor: '#ff8000', descricao: 'O laranja é uma cor quente, associada ao pôr do sol e às folhas de outono. É uma cor secundária formada pela mistura de vermelho e amarelo.' },
+        'amarelo': { nome: 'Amarelo', comprimento: '590 – 560 nm', frequencia: '510 – 540 THz', energia: '2,10 – 2,17 eV', cor: '#ffdd00', descricao: 'O amarelo é a cor mais visível para o olho humano — por isso é usado em sinais de trânsito, placas e uniformes de segurança.' },
+        'verde': { nome: 'Verde', comprimento: '560 – 490 nm', frequencia: '540 – 610 THz', energia: '2,17 – 2,48 eV', cor: '#00c800', descricao: 'O verde está no meio do espectro visível — é a cor que o olho humano detecta com mais facilidade. Está associado à natureza e à fotossíntese.' },
+        'ciano': { nome: 'Ciano', comprimento: '490 – 480 nm', frequencia: '610 – 620 THz', energia: '2,48 – 2,53 eV', cor: '#00d0d0', descricao: 'O ciano (ou azul-esverdeado) fica entre o verde e o azul. É uma cor fria, usada em impressão (CMYK) e design digital.' },
+        'azul': { nome: 'Azul', comprimento: '480 – 440 nm', frequencia: '620 – 680 THz', energia: '2,53 – 2,76 eV', cor: '#0060ff', descricao: 'O azul tem comprimento de onda curto e alta frequência. É uma das três cores primárias da luz (RGB) e é associada à tranquilidade.' },
+        'violeta': { nome: 'Violeta', comprimento: '440 – 400 nm', frequencia: '680 – 750 THz', energia: '2,76 – 3,10 eV', cor: '#6000c8', descricao: 'O violeta tem o menor comprimento de onda do espectro visível — quase ultravioleta. É a última cor que enxergamos antes da radiação invisível.' }
+    };
+
+    let faixaAtiva = null;
+    let corAtiva = null;
+
+    function selecionarFaixa(id) {
+        if (faixaAtiva === id) {
+            faixaAtiva = null;
+            document.querySelectorAll('.espectro-visual .faixa').forEach(f => f.classList.remove('ativo'));
+            document.querySelectorAll('.espectro-controles .btn-controle').forEach(b => b.classList.remove('ativo'));
+            document.getElementById('espectroPainel').innerHTML = `
+                <div class="espectro-placeholder">
+                    <i class="fas fa-hand-pointer"></i>
+                    <span>Clique em uma faixa do espectro para ver os detalhes</span>
+                </div>
+            `;
+            return;
+        }
+        faixaAtiva = id;
+        const data = faixasData[id];
+        document.querySelectorAll('.espectro-visual .faixa').forEach(f => { f.classList.toggle('ativo', f.dataset.faixa === id); });
+        document.querySelectorAll('.espectro-controles .btn-controle').forEach(b => {
+            const onclickAttr = b.getAttribute('onclick') || '';
+            b.classList.toggle('ativo', onclickAttr.includes(`'${id}'`));
+        });
+        const idx = Object.keys(faixasData).indexOf(id);
+        const slider = document.getElementById('espectroSlider');
+        if (slider) slider.value = idx;
+        document.getElementById('indicadorCor').style.background = data.cor;
+        document.getElementById('faixaAtualNome').textContent = data.nome;
+        document.getElementById('faixaAtualDesc').textContent = `${data.comprimento} · ${data.frequencia}`;
+        const ionTag = data.ionizante === true ? '<span class="detalhe-tag ionizante">☢️ Ionizante</span>' : data.ionizante === 'limiar' ? '<span class="detalhe-tag" style="background: rgba(200,140,20,0.15); color: #8a6a00; border-color: rgba(200,140,20,0.3);">⚠️ Limiar</span>' : '<span class="detalhe-tag nao-ionizante">✅ Não ionizante</span>';
+        const tagsHtml = data.tags.map(t => `<span class="detalhe-tag">${t}</span>`).join('');
+        document.getElementById('espectroPainel').innerHTML = `
+            <div class="espectro-detalhe-card" style="border-left-color: ${data.cor};">
+                <div class="detalhe-topo">
+                    <div class="detalhe-icone" style="background: ${data.cor};"><i class="${data.icone}"></i></div>
+                    <div><div class="detalhe-titulo">${data.nome}</div><div class="detalhe-sub">${data.sub}</div></div>
+                </div>
+                <div class="detalhe-stats">
+                    <div class="detalhe-stat"><div class="stat-label">Comprimento de onda</div><div class="stat-valor">${data.comprimento}</div></div>
+                    <div class="detalhe-stat"><div class="stat-label">Frequência</div><div class="stat-valor">${data.frequencia}</div></div>
+                    <div class="detalhe-stat"><div class="stat-label">Energia</div><div class="stat-valor">${data.energia}</div></div>
+                </div>
+                <div class="detalhe-desc">${data.descricao}</div>
+                <div class="detalhe-tags">${ionTag}${tagsHtml}</div>
+            </div>
+        `;
+        if (window.innerWidth < 600) {
+            setTimeout(() => { document.getElementById('espectroPainel').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
+        }
+    }
+
+    function selecionarCor(id) {
+        if (corAtiva === id) {
+            corAtiva = null;
+            document.querySelectorAll('.espectro-visivel-detalhe .cor').forEach(c => c.classList.remove('ativo'));
+            document.getElementById('espectroCorPainel').innerHTML = `
+                <div class="espectro-placeholder">
+                    <i class="fas fa-palette"></i>
+                    <span>Clique em uma cor do arco-íris para ver o comprimento de onda</span>
+                </div>
+            `;
+            return;
+        }
+        corAtiva = id;
+        const data = coresData[id];
+        document.querySelectorAll('.espectro-visivel-detalhe .cor').forEach(c => { c.classList.toggle('ativo', c.dataset.cor === id); });
+        document.getElementById('espectroCorPainel').innerHTML = `
+            <div class="espectro-cor-card" style="border-left-color: ${data.cor};">
+                <div class="cor-amostra" style="background: ${data.cor};"></div>
+                <div class="cor-conteudo">
+                    <div class="cor-titulo">
+                        <span class="cor-simbolo" style="background: ${data.cor};"></span>
+                        ${data.nome}
+                    </div>
+                    <div class="cor-sub">🌈 Cor do espectro visível</div>
+                    <div class="cor-stats">
+                        <div class="cor-stat"><div class="stat-label">Comprimento de onda</div><div class="stat-valor">${data.comprimento}</div></div>
+                        <div class="cor-stat"><div class="stat-label">Frequência</div><div class="stat-valor">${data.frequencia}</div></div>
+                        <div class="cor-stat"><div class="stat-label">Energia do fóton</div><div class="stat-valor">${data.energia}</div></div>
+                    </div>
+                    <div class="cor-desc">${data.descricao}</div>
+                </div>
+            </div>
+        `;
+        if (window.innerWidth < 600) {
+            setTimeout(() => { document.getElementById('espectroCorPainel').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
+        }
+    }
+
+    function atualizarSlider(valor) {
+        const ids = Object.keys(faixasData);
+        const id = ids[valor];
+        if (id) selecionarFaixa(id);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => { selecionarFaixa('visivel'); }, 3000);
     });
 </script>
 
